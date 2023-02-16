@@ -1,0 +1,26 @@
+
+version: 2
+
+models:
+  - name: blocks
+    description: "List of of Blocks in Ethereum"
+    columns:
+      - name: number
+        description: "Blocks number"
+        tests:
+          - unique
+          - not_null
+      - name: hash
+        description: "Hash"
+        tests:
+          - unique
+          - not_null
+
+  - name: transactions
+    description: "List of transactions in Ethereum"
+    columns:
+      - name: hash
+        description: "Hash"
+        tests:
+          - unique
+          - not_null
