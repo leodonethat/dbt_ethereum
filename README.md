@@ -1,15 +1,26 @@
-Welcome to your new dbt project!
 
-### Using the starter project
+## Using dbt to transform Ethereum data
 
-Try running the following commands:
-- dbt run
-- dbt test
+This is a proof concept to create an analytics pipeline for Ethereum.
 
+* Erigon is the Ethereum client and provides an API
+* Airbyte extracts data from the API and loads it in a local postgres database
+* DBT transforms the data in the local database
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+To try it out clone this repo and execute:
+
+```bash
+docker run -it \
+--platform linux/amd64 \
+--network=host \
+--mount type=bind,source=/Users/leodonethat/GitHub/dbt_ethereum,target=/usr/app/dbt_ethereum \
+--mount type=bind,source=/Users/leodonethat/dbt_profiles/,target=/root/.dbt/ \
+ghcr.io/dbt-labs/dbt-postgres \
+test --project-dir /usr/app/dbt_ethereum/
+```
+
+Note we need an extra `profiles.yml` in `/Users/leodonethat/dbt_profiles/` with the credentials for the postgres database.
+
+For details on how to create this project for scratch follow the walkthrough in:
+
+https://leo.sh/blockchain/2023/02/13/using_dbt_to_transform_ethereum_data.html
